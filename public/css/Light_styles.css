@@ -108,7 +108,6 @@ button:disabled {
 
 .chat__messages {
     flex-grow: 1;
-    background: #333744;
     padding: 24px 24px 0 24px;
     overflow-y: scroll;
 }
@@ -120,23 +119,18 @@ button:disabled {
 }
 
 .message__name {
-    color: #d9d9d9;
     font-weight: 600;
     font-size: 14px;
     margin-right: 8px;
 }
 
 .message__meta {
-    color: #5b626f;
+    color: #777;
     font-size: 14px;
 }
 
-.message__text {
-    color: #d9d9d9;
-}
-
 .message a {
-    color: lightskyblue;
+    color: #0070CC;
 }
 
 /* Message Composition Styles */
@@ -144,9 +138,8 @@ button:disabled {
 .compose {
     display: flex;
     flex-shrink: 0;
-    /* margin-top: 16px; */
+    margin-top: 16px;
     padding: 24px;
-    background-color: #333744;
 }
 
 .compose form {
@@ -156,9 +149,7 @@ button:disabled {
 }
 
 .compose input {
-    border: 2px solid #2c2f3a;
-    background-color: #333744;
-    color: white;
+    border: 1px solid #eeeeee;
     width: 100%;
     padding: 12px;
     margin: 0 16px 0 0;
