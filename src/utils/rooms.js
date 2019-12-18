@@ -2,6 +2,9 @@
 const rooms = []
 
 const checkForAddingRoom = (roomname, users) => {
+    // Clean data
+    roomname = roomname.trim().toLowerCase().replace(" ", "")
+
     let add = false
     const  nb = getNumberofUser(roomname, users)
     if (nb === 0) {
@@ -12,9 +15,6 @@ const checkForAddingRoom = (roomname, users) => {
 }
 
 const addRoom = (roomname) => {
-    // Clean data
-    roomname = roomname.trim().toLowerCase()
-
     // Validate data
     if (!roomname) {
         return {
