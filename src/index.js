@@ -6,7 +6,8 @@ const Filter = require('bad-words')
 
 const { generateMessage, generateLocationMessage } = require('./utils/messages')
 const { addUser, removeUser, getUser, getUsers, getUsersInRoom } = require('./utils/users')
-const {checkForAddingRoom, checkForRemoveRoom, getNumberofUser, getRooms } = require('./utils/rooms')
+const { checkForAddingRoom, checkForRemoveRoom, getNumberofUser, getRooms } = require('./utils/rooms')
+const { getRoomInfo } = require('./utils/boardingInfo')
 
 const app = express()
 const server = http.createServer(app)
@@ -44,6 +45,9 @@ io.on('connection', (socket) => {
         })
 
         io.emit('rooms', getRooms())
+        
+        const rooms = getRoomInfo()
+        io.emit('LandingInfo', rooms)
 
         callback()
 
@@ -84,7 +88,17 @@ io.on('connection', (socket) => {
             })
 
             io.emit('rooms', getRooms())
+
+            const rooms = getRoomInfo()
+            io.emit('LandingInfo', rooms)
         }
+    })
+
+    /* ------------------------------------------------ */
+
+    socket.on('needLandingInfo', () => {
+        const rooms = getRoomInfo()
+        socket.emit('LandingInfo', rooms)
     })
 })
 
