@@ -183,28 +183,35 @@ button:disabled {
     font-weight: 500;
     font-size: 18px;
     margin-bottom: 4px;
-    border-bottom: 1px solid #2c2f3a;
+    color: lightskyblue;
+    border-top: 5px solid #2c2f3a;
+    border-bottom: 5px solid #2c2f3a;
     padding: 12px 24px 12px 24px;
 }
 
-.users {
+.elements {
     padding-left: 10px;
     list-style-type: none;
     font-weight: 300;
     padding: 12px 24px 12px 14px;
 }
 
-.user {
+.element {
     padding: 5px 0 5px 10px;
     margin: 5px 0;
     -webkit-transition: box-shadow 0.4s, background-color 0.4s;
     transition: box-shadow 0.4s, background-color 0.4s;
 }
 
-.user:hover {
+.element:hover {
     box-shadow: 3px 3px 15px black;
     -webkit-transition: box-shadow 0.4s, background-color 0.4s;
     transition: box-shadow 0.4s, background-color 0.4s;
+}
+
+.roomLink {
+    text-decoration: none;
+    color: white;
 }
 
 /* width */
