@@ -67,6 +67,14 @@ io.on('connection', (socket) => {
         callback()
     })
 
+    socket.on('sendYoutubeLink', (message, callback) => {
+        const user = getUser(socket.id)
+        message = message.replace("watch?v=", "embed/").replace("playlist", "embed/videoseries")
+
+        io.to(user.room).emit('youtubeMessage', generateMessage(user.username, message))
+        callback()
+    })
+
     socket.on('sendLocation', (coords, callback) => {
         const user = getUser(socket.id)
 

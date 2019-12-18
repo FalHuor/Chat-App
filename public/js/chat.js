@@ -9,6 +9,7 @@ const $messages = document.querySelector('#messages')
 
 // Templates
 const messageTemplate = document.querySelector('#message-template').innerHTML
+const youtubeMessageTemplate = document.querySelector('#youtube-message-template').innerHTML
 const locationMessageTemplate = document.querySelector('#location-message-template').innerHTML
 const sidebarTemplate = document.querySelector('#sidebar-template').innerHTML
 const sidebarRoomTemplate = document.querySelector('#sidebarRoom-template').innerHTML
@@ -42,6 +43,17 @@ const autoscroll = () => {
 socket.on('message', (message) => {
     console.log(message)
     const  html = Mustache.render(messageTemplate, {
+        username: message.username,
+        message: message.text,
+        createdAt: moment(message.createdAt).format('H:mm:ss')
+    })
+    $messages.insertAdjacentHTML('beforeend', html)
+    autoscroll()
+})
+
+socket.on('youtubeMessage', (message) => {
+    console.log(message)
+    const  html = Mustache.render(youtubeMessageTemplate, {
         username: message.username,
         message: message.text,
         createdAt: moment(message.createdAt).format('H:mm:ss')
@@ -88,15 +100,31 @@ $messageForm.addEventListener('submit', (e) => {
 
     const message = e.target.elements.message.value
 
-    socket.emit('sendMessage', message, (error) => {
-        $messageFormButton.removeAttribute('disabled')
-        $messageFormInput.value = ''
-        $messageFormInput.focus()
-        if (error) {
-            return console.log(error);
-        }
-        console.log('message deliver');
-    })
+    const shortMessage = message.slice(0, 23);
+
+    switch (shortMessage) {
+        case "https://www.youtube.com":
+            socket.emit('sendYoutubeLink', message, (error) => {
+                if (error) {
+                    return console.log(error);
+                }
+                console.log('YoutubeLink deliver');
+            })
+            break;
+    
+        default:
+            socket.emit('sendMessage', message, (error) => {
+                if (error) {
+                    return console.log(error);
+                }
+                console.log('message deliver');
+            })
+            break;
+    }
+
+    $messageFormButton.removeAttribute('disabled')
+    $messageFormInput.value = ''
+    $messageFormInput.focus()
 })
 
 $sendLocationButton.addEventListener('click', () => {
