@@ -15,7 +15,7 @@ const sidebarTemplate = document.querySelector('#sidebar-template').innerHTML
 const sidebarRoomTemplate = document.querySelector('#sidebarRoom-template').innerHTML
 
 // Options
-const { username, room } = Qs.parse(location.search, { ignoreQueryPrefix: true })
+const { username, room, color } = Qs.parse(location.search, { ignoreQueryPrefix: true })
 
 const autoscroll = () => {
     // New message element
@@ -44,6 +44,7 @@ socket.on('message', (message) => {
     console.log(message)
     const  html = Mustache.render(messageTemplate, {
         username: message.username,
+        usercolor: message.usercolor,
         message: message.text,
         createdAt: moment(message.createdAt).format('H:mm:ss')
     })
@@ -55,6 +56,7 @@ socket.on('youtubeMessage', (message) => {
     console.log(message)
     const  html = Mustache.render(youtubeMessageTemplate, {
         username: message.username,
+        usercolor: message.usercolor,
         message: message.text,
         createdAt: moment(message.createdAt).format('H:mm:ss')
     })
@@ -65,6 +67,7 @@ socket.on('youtubeMessage', (message) => {
 socket.on('locationMessage', (message) => {
     const html = Mustache.render(locationMessageTemplate, {
         username: message.username,
+        usercolor: message.usercolor,
         url: message.url,
         createdAt: moment(message.createdAt).format('H:mm:ss')
     })
@@ -147,7 +150,7 @@ $sendLocationButton.addEventListener('click', () => {
     })
 })
 
-socket.emit('join', { username, room }, (error) => {
+socket.emit('join', { username, room, color }, (error) => {
     if (error) {
         alert(error)
         location.href = '/'   

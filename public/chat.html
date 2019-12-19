@@ -30,7 +30,7 @@
         <script id="message-template" type="text/html">
             <div class="message">
                 <p>
-                    <span class="message__name">{{username}}</span>
+                    <span class="message__name"  style="color: {{usercolor}}">{{username}}</span>
                     <span class="message__meta">{{createdAt}}</span>
                 </p>
                 <p class="message__text">{{message}}</p>    
@@ -40,7 +40,7 @@
         <script id="youtube-message-template" type="text/html">
             <div class="message">
                 <p>
-                    <span class="message__name">{{username}}</span>
+                    <span class="message__name"  style="color: {{usercolor}}">{{username}}</span>
                     <span class="message__meta">{{createdAt}}</span>
                 </p>
                 <iframe width="336" height="189" src='{{message}}' frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -50,7 +50,7 @@
         <script id="location-message-template" type="text/html">
             <div class="message">
                 <p>
-                    <span class="message__name">{{username}}</span>
+                    <span class="message__name"  style="color: {{usercolor}}">{{username}}</span>
                     <span class="message__meta">{{createdAt}}</span>
                 </p>
                 <p><a href='{{url}}' target="_blank">This is my location !</a></p>    
@@ -62,7 +62,7 @@
             <h3 class="list-title">Users</h3>
             <ul class="elements">
                 {{#users}}
-                    <li class="element">{{username}}</li>
+                    <li class="element" style="color: {{color}}">{{username}}</li>
                 {{/users}}
             </ul>
             <div id="sidebarNext">

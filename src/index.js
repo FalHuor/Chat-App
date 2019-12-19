@@ -4,7 +4,7 @@ const express = require('express')
 const socketio = require('socket.io')
 const Filter = require('bad-words')
 
-const { generateMessage, generateLocationMessage } = require('./utils/messages')
+const { generateMessage, generateWelcomeMessage,generateLocationMessage } = require('./utils/messages')
 const { addUser, removeUser, getUser, getUsers, getUsersInRoom } = require('./utils/users')
 const { checkForAddingRoom, checkForRemoveRoom, getNumberofUser, getRooms } = require('./utils/rooms')
 const { getRoomInfo } = require('./utils/boardingInfo')
@@ -25,10 +25,10 @@ app.use(express.static(publicDirectoryPath))
 io.on('connection', (socket) => {
     console.log('New web socket connection')
 
-    socket.on('join', ({username, room}, callback) => {
+    socket.on('join', ({username, room, color}, callback) => {
 
         const addRoom = checkForAddingRoom(room, getUsers())
-        const { error, user } = addUser({ id: socket.id, username, room })
+        const { error, user } = addUser({ id: socket.id, username, room, color })
 
         if (error) {
             return callback(error)
@@ -36,8 +36,8 @@ io.on('connection', (socket) => {
 
         socket.join(user.room)
         
-        socket.emit("message", generateMessage('Admin', `Welcome to the ${user.room} room !`))
-        socket.broadcast.to(user.room).emit("message", generateMessage(`${user.username} has join the room !`))
+        socket.emit("message", generateWelcomeMessage('Admin', `Welcome to the ${user.room} room !`))
+        socket.broadcast.to(user.room).emit("message", generateWelcomeMessage(`${user.username} has join the room !`))
 
         io.to(user.room).emit('roomData', {
             room: user.room,
@@ -63,7 +63,7 @@ io.on('connection', (socket) => {
 
         const user = getUser(socket.id)
 
-        io.to(user.room).emit('message', generateMessage(user.username, message))
+        io.to(user.room).emit('message', generateMessage(user, message))
         callback()
     })
 
@@ -71,14 +71,14 @@ io.on('connection', (socket) => {
         const user = getUser(socket.id)
         message = message.replace("watch?v=", "embed/").replace("playlist", "embed/videoseries")
 
-        io.to(user.room).emit('youtubeMessage', generateMessage(user.username, message))
+        io.to(user.room).emit('youtubeMessage', generateMessage(user, message))
         callback()
     })
 
     socket.on('sendLocation', (coords, callback) => {
         const user = getUser(socket.id)
 
-        io.to(user.room).emit('locationMessage', generateLocationMessage(user.username, `https://google.com/maps?q=${coords.latitude},${coords.longitude}`))
+        io.to(user.room).emit('locationMessage', generateLocationMessage(user, `https://google.com/maps?q=${coords.latitude},${coords.longitude}`))
         callback()
     })
 
@@ -89,7 +89,7 @@ io.on('connection', (socket) => {
 
         if (user) {
             const romoveRoom = checkForRemoveRoom(user.room, getUsers())
-            io.to(user.room).emit('message', generateMessage(`${user.username} has left the room !`))
+            io.to(user.room).emit('message', generateWelcomeMessage(`${user.username} has left the room !`))
             io.to(user.room).emit('roomData', {
                 room: user.room,
                 users: getUsersInRoom(user.room)
@@ -100,6 +100,13 @@ io.on('connection', (socket) => {
             const rooms = getRoomInfo()
             io.emit('LandingInfo', rooms)
         }
+
+        const rooms = getRoomInfo()
+        rooms.forEach(room => {
+            console.log(room);
+            
+            checkForRemoveRoom(room.roomname, getUsers())
+        });
     })
 
     /* ------------------------------------------------ */
