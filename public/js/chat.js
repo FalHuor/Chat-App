@@ -88,7 +88,8 @@ socket.on('roomData', ({room, users}) => {
 socket.on('rooms', (rooms) => {
     const html = Mustache.render(sidebarRoomTemplate, {
         rooms, 
-        username
+        username,
+        color
     })
     document.querySelector('#sidebarNext').innerHTML = html
     console.log(rooms)
