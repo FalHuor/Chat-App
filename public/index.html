@@ -3,22 +3,86 @@
     <head>
         <title>Chat App</title>
         <link rel="icon" href="/img/favicon.png">
+        <link rel="stylesheet" href="/css/input-animation.css">
         <link rel="stylesheet" href="/css/styles.css">
+        
     </head>
     <body>
         <div class="centered-form">
             <div class="centered-form__box">
-                <h1>Join</h1>
-                <form action="/chat.html">
-                    <label>Display Name</label>
-                    <input type="text" name="username" placeholder="enter your name" required autocomplete="off">
+                <form id="joining-form" action="/chat.html">
+                    <label>Display Name / Pseudo</label>
+
+
+                    <div class="col-3">
+                        <input class="effect" type="text" name="username" placeholder="enter your name" required autocomplete="off">
+                        <span class="focus-border">
+                                <i></i>
+                        </span>
+                    </div>
+
+
+                    <!-- <input id="username-input" type="text" name="username" placeholder="enter your name" required autocomplete="off"> -->
+                    <label>Pick a Color</label>
+                    <div class="color-picker">
+                        <div class="color" id="salmon" style="background-color: salmon;"></div>
+                        <div class="color" id="lightgreen" style="background-color: lightgreen;"></div>
+                        <div class="color" id="cyan" style="background-color: cyan;"></div>
+                        <div class="color" id="orange" style="background-color: orange;"></div>
+                        <div class="color" id="lightseagreen" style="background-color: lightseagreen;"></div>
+                        <div class="color" id="darkorchid" style="background-color: darkorchid;"></div>
+                    </div>
+                    <input class="hidden-input" id="color-input" type="text" name="color" value="">
+                    <h1>Join room</h1>
+                    <div id="join-room">
+                        <!-- <div class="room">
+                            <span class="room-name">coffee</span>
+                            <span class="room-seat">2</span>
+                            <div class="room-join-button" value="coffee">Join</div>
+                        </div>
+                        <div class="room">
+                            <span class="room-name">Tea</span>
+                            <span class="room-seat">3</span>
+                            <div class="room-join-button" value="Tea">Join</div>
+                        </div> -->
+                        <p>no room available</p>
+                    </div>
+                    <h1>Create room</h1>
                     <label>Room Name</label>
-                    <input type="text" name="room" placeholder="Room" required autocomplete="off">
-                    <button>Join</button>
+
+                    <div class="col-3">
+                        <input id="room-input" class="effect" type="text" name="room" placeholder="Room" autocomplete="off">
+                        <span class="focus-border">
+                                <i></i>
+                        </span>
+                    </div>
+
+                    <div>
+                        <!-- <input id="room-input" type="text" name="room" placeholder="Room" autocomplete="off"> -->
+                    </div>
+                    <button class="join-page-button">Join</button>
+                    <!-- <div class="create-button">Join</div>
+                    <div class="create-button">Join</div> -->
                 </form>
             </div>
         </div> 
 
+        <!--###############################  SCRIPT TEMPLATE  ###################################-->
+
+        <script id="room-template" type="text/html">
+            {{#rooms}}
+                <div class="room">
+                    <span class="room-name">{{roomname}}</span>
+                    <span class="room-seat">{{seat}}</span>
+                    <div class="room-join-button">Join</div>
+                </div>
+            {{/rooms}}
+        </script>
+
+        <!--###############################  SCRIPT  ###################################-->
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
         <script src="/socket.io/socket.io.js"></script>
         <script src="/js/connectionPage.js"></script>
     </body>

@@ -17,6 +17,9 @@ const sidebarRoomTemplate = document.querySelector('#sidebarRoom-template').inne
 // Options
 const { username, room, color } = Qs.parse(location.search, { ignoreQueryPrefix: true })
 
+console.log(username, room, color);
+
+
 const autoscroll = () => {
     // New message element
     const $newMessage = $messages.lastElementChild
