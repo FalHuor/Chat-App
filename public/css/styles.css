@@ -105,7 +105,6 @@ button:disabled {
 .room {
     display: flex;
     align-items: center;
-    cursor: pointer;
     margin: 10px auto;
     justify-content: flex-start;
     text-align: center;
@@ -114,6 +113,7 @@ button:disabled {
     background-color: #22242c;
     color: white;
     font-size: 16px;
+    border-radius: 5px;
     transition: background-color .3s ease, box-shadow 0.4s;
     animation: fadein .5s;
     -moz-animation: fadein .5s; /* Firefox */
@@ -136,15 +136,22 @@ button:disabled {
 
 .room-seat {
     text-align: left;
-    width: 25%;
+    width: 5%;
+}
+
+.room-seat-logo {
+    text-align: left;
+    width: 20%;
 }
 
 .room-join-button {
+    cursor: pointer;
     visibility: hidden;
     float: right;
     padding: 5px;
     width: 15%;
     background-color: #7C5CBF;
+    border-radius: 5px;
 }
 
 .room-join-button:hover {
@@ -170,8 +177,10 @@ button:disabled {
 }
 
 .color {
+    cursor: pointer;
     height: 30px;
     width: 30px;
+    border-radius: 3px;
     transition: height .5s ease, width .5s ease;
     /* animation: color-picken-animation-down 0.5s ease-in; */
     /* border: 10px solid #F7F7FA; */
@@ -195,6 +204,7 @@ button:disabled {
 
 .join-page-button {
     margin-top: 12px;
+    border-radius: 5px;
 }
 
 /* Chat Page Layout */
