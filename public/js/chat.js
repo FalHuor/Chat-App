@@ -160,7 +160,3 @@ socket.emit('join', { username, room, color }, (error) => {
         location.href = '/'   
     }
 })
-
-
-
-

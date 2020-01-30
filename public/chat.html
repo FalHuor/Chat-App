@@ -12,6 +12,13 @@
 
             </div>
             <div class="chat__main">
+                <div class="container">
+                    <label id="switch" class="switch">
+                        <input type="checkbox" onchange="toggleTheme()" id="slider">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+
                 <div id="messages" class="chat__messages"></div>
 
                 <div class="compose">
@@ -87,5 +94,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
         <script src="/socket.io/socket.io.js"></script>
         <script src="/js/chat.js"></script>
+        <script src="/js/themeChanger.js"></script>
     </body>
 </html>
