@@ -264,7 +264,7 @@ body {
 .container {
     position: fixed;
     height: 80px;
-    top: 20px;
+    top: 10px;
     right: 30px;
     flex-direction: column;
     justify-content: center;
@@ -285,7 +285,8 @@ body {
 /* The switch - the box around the slider */
 .switch {
     position: relative;
-    display: inline-block;
+    display: block;
+    margin: 20px auto;
     width: 50px;
     height: 24px;
 }
@@ -323,7 +324,19 @@ body {
     -webkit-transition: 0.4s;
     transition: 0.4s;
     box-shadow: 0 0px 15px #2020203d;
-    background: white url('https://i.ibb.co/FxzBYR9/night.png');
+    /* background: white url('../img/night.png'); */
+    /* background-repeat: no-repeat;
+    background-position: center; */
+}
+
+#theme:before {
+    background: white url('../img/night.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#sound:before {
+    background: white url('../img/Sound.png');
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -340,7 +353,19 @@ input:checked + .slider:before {
     -webkit-transform: translateX(24px);
     -ms-transform: translateX(24px);
     transform: translateX(24px);
-    background: white url('https://i.ibb.co/7JfqXxB/sunny.png');
+    /* background: white url('../img/sunny.png'); */
+    /* background-repeat: no-repeat;
+    background-position: center; */
+}
+
+input:checked + #theme:before {
+    background: white url('../img/sunny.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+input:checked + #sound:before {
+    background: white url('../img/NoSound.png');
     background-repeat: no-repeat;
     background-position: center;
 }

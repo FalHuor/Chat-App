@@ -14,8 +14,12 @@
             <div class="chat__main">
                 <div class="container">
                     <label id="switch" class="switch">
-                        <input type="checkbox" onchange="toggleTheme()" id="slider">
-                        <span class="slider round"></span>
+                        <input type="checkbox" onchange="toggleTheme()" id="themeSlider">
+                        <span class="slider round" id="theme"></span>
+                    </label>
+                    <label id="switch" class="switch">
+                        <input type="checkbox" onchange="toggleSound()" id="soundSlider">
+                        <span class="slider round" id="sound"></span>
                     </label>
                 </div>
 
@@ -94,6 +98,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
         <script src="/socket.io/socket.io.js"></script>
         <script src="/js/chat.js"></script>
-        <script src="/js/themeChanger.js"></script>
+        <script src="/js/slider.js"></script>
     </body>
 </html>

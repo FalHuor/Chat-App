@@ -52,6 +52,7 @@ socket.on('message', (message) => {
         createdAt: moment(message.createdAt).format('H:mm:ss')
     })
     $messages.insertAdjacentHTML('beforeend', html)
+    playNotification(message.username)
     autoscroll()
 })
 
@@ -64,6 +65,7 @@ socket.on('youtubeMessage', (message) => {
         createdAt: moment(message.createdAt).format('H:mm:ss')
     })
     $messages.insertAdjacentHTML('beforeend', html)
+    playNotification(message.username)
     autoscroll()
 })
 
@@ -75,6 +77,7 @@ socket.on('locationMessage', (message) => {
         createdAt: moment(message.createdAt).format('H:mm:ss')
     })
     $messages.insertAdjacentHTML('beforeend', html)
+    playNotification(message.username)
     autoscroll()
 })
 
@@ -160,3 +163,13 @@ socket.emit('join', { username, room, color }, (error) => {
         location.href = '/'   
     }
 })
+
+function playNotification(user){
+    if (user != username && user != "Admin") {
+        if (localStorage.getItem('sound') === 'on' && !window.onfocus){
+            var mp3Source = '<source src="../sound/NotificationSound.mp3" type="audio/mpeg">';
+            var embedSource = '<embed hidden="true" autostart="true" loop="false" src="../sound/NotificationSound.mp3">';
+            document.getElementById("sound").innerHTML='<audio autoplay="autoplay">' + mp3Source + embedSource + '</audio>';
+        }
+    }
+}
