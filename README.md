@@ -4,7 +4,7 @@
 
 This application is only intended to be a small personal project to work on nodeJs, using socket.io.
 
-[An online deployed version is available here](https://falhuor-weather-app.herokuapp.com/)
+[An online deployed version is available here](https://falhuor-chat-app.herokuapp.com/)
 
 
 ## DEPENDENCIES 
