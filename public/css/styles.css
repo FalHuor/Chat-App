@@ -209,16 +209,71 @@ button:disabled {
 
 /* Chat Page Layout */
 
+.chat #sidebar .arrow:hover {
+    color: var(--color-blue);
+    /* transition: background-color .3s ease, color .3s ease;
+    color: var(--main-text-color); */
+    /* background-color: var(--color-backgnd); */
+}
+
 .chat {
     display: flex;
 }
 
 .chat__sidebar {
+    z-index: 10;
     height: 100vh;
+    box-shadow: 10px 0 5px var(--color-shadow);
     color: var(--main-text-color);
     background: var(--color-backgnd);
     width: 225px;
-    overflow-y: scroll
+    overflow-y: scroll;
+    transition: background-color .3s ease;
+    animation: openpanel .5s;
+}
+
+.hoverOn:hover > .arrow {
+    animation: fadein .5s;
+    transition: background-color .3s ease, color .3s ease;
+    color: var(--main-text-color);
+    opacity: 1;
+}
+
+.pannel_close {
+    width: 0;
+    animation: closepanel .5s;
+}
+
+.arrow {
+    opacity: 0;
+    position: fixed;
+    z-index: 11;
+    top: 46vh;
+    width: 35px;
+    height: 70px;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+    background-color: var(--color-border);
+    box-shadow: 10px 1px 5px var(--color-shadow);
+    color: var(--color-border);
+    padding: 23px 0 23px 6px;
+    transition: background-color .3s ease, color .3s ease;
+    animation: fadeout .5s ease-in;
+}
+
+.arrow i {
+    font-size: 24px;
+}
+
+.arrow_open {
+    animation: ArrowClose .5s;
+    left: 225px;
+    animation-delay: 2s;
+}
+
+.arrow_close {
+    animation: ArrowOpen .5s;
+    left: 0;
 }
 
 /* Test dark/light mode */
@@ -252,7 +307,7 @@ body {
     --color-border: #2c2f3a;
     --color-second-backgnd: #22242c;
     --color-blue: lightskyblue;
-    --color-shadow: black;
+    --color-shadow: #22242c;
 
     /* #2c2f3a */
     --color-primary: #17ed90;
@@ -269,6 +324,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
 }
 .container h1 {
     color: var(--font-color);
@@ -309,6 +365,7 @@ body {
     background-color: #ccc;
     -webkit-transition: 0.4s;
     transition: 0.4s;
+    transition: background-color .3s ease;
 }
 
 .slider:before {
@@ -393,8 +450,9 @@ input:checked + #sound:before {
     flex-grow: 1;
     /* background: #333744; */
     background: var(--color-backgnd);
-    padding: 24px 24px 0 24px;
+    padding: 24px 24px 0 36px;
     overflow-y: scroll;
+    transition: background-color .3s ease;
 }
 
 /* Message Styles */
@@ -429,8 +487,9 @@ input:checked + #sound:before {
     display: flex;
     flex-shrink: 0;
     /* margin-top: 16px; */
-    padding: 24px;
+    padding: 24px 36px 24px 36px;
     background-color: var(--color-backgnd);
+    transition: background-color .3s ease;
 }
 
 .compose form {
@@ -447,6 +506,7 @@ input:checked + #sound:before {
     padding: 12px;
     margin: 0 16px 0 0;
     flex-grow: 1;
+    transition: background-color .3s ease;
 }
 
 .compose button {
@@ -460,7 +520,7 @@ input:checked + #sound:before {
     font-size: 22px;
     background: var(--color-border);
     padding: 24px;   
-    padding-left: 24px;  
+    padding-left: 24px;
 }
 
 .list-title {
@@ -477,18 +537,22 @@ input:checked + #sound:before {
     padding-left: 10px;
     list-style-type: none;
     font-weight: 300;
-    padding: 12px 24px 12px 14px;
+    padding: 12px 8px 12px 8px;
 }
 
 .element {
-    padding: 5px 0 5px 10px;
+    padding: 5px 0 5px 20px;
+    border-radius: 7px;
+    background-color: var(--color-backgnd);
     margin: 5px 0;
     -webkit-transition: box-shadow 0.4s, background-color 0.4s;
     transition: box-shadow 0.4s, background-color 0.4s;
+    transition: background-color .3s ease;
 }
 
 .element:hover {
-    box-shadow: 3px 3px 15px var(--color-shadow);;
+    background-color: var(--color-border);
+    /* box-shadow: 3px 3px 15px var(--color-shadow);; */
     -webkit-transition: box-shadow 0.4s, background-color 0.4s;
     transition: box-shadow 0.4s, background-color 0.4s;
 }
@@ -521,6 +585,31 @@ input:checked + #sound:before {
 @keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }
+}
+
+@keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+@keyframes closepanel {
+    from { width : 225px; }
+    to   { width : 0; }
+}
+
+@keyframes openpanel {
+    from { width : 0; }
+    to   { width : 225px; }
+}
+
+@keyframes ArrowOpen {
+    from { left : 0; }
+    to   { left : 225px; }
+}
+
+@keyframes ArrowClose {
+    from { left : 225px; }
+    to   { left : 0; }
 }
 
 /* Firefox < 16 */

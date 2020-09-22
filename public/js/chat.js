@@ -86,7 +86,7 @@ socket.on('roomData', ({room, users}) => {
         room,
         users
     })
-    document.querySelector('#sidebar').innerHTML = html
+    document.querySelector('#sidebar_content').innerHTML = html
     console.log(users);
     
 })
@@ -163,6 +163,31 @@ socket.emit('join', { username, room, color }, (error) => {
         location.href = '/'   
     }
 })
+
+$("#sidebar").on('click', '.arrow', function(){ 
+    
+    $(".chat__sidebar").toggleClass("pannel_close")
+    
+    if ($(".arrow").attr('class') == "arrow arrow_open") {
+        onAnimateStart()
+        $(".arrow").removeClass("arrow_open").addClass("arrow_close")
+        $(".arrow").children().removeClass("fa-angle-left").addClass("fa-angle-right")
+        setTimeout(function(){ onAnimateComplete(); }, 500);
+    } else {
+        onAnimateStart()
+        $(".arrow").removeClass("arrow_close").addClass("arrow_open")
+        $(".arrow").children().removeClass("fa-angle-right").addClass("fa-angle-left")
+        setTimeout(function(){ onAnimateComplete(); }, 500);
+    }
+});
+
+function onAnimateStart() {
+    $(".chat__sidebar").removeClass('hoverOn');
+}
+  
+function onAnimateComplete() {
+    $(".chat__sidebar").addClass('hoverOn');
+}
 
 function playNotification(user){
     if (user != username && user != "Admin") {
